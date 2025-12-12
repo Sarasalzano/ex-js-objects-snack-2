@@ -1,0 +1,96 @@
+Code Question 1
+
+Senza lanciare il codice, riesci a prevedere cosa viene stampato in console?
+Quanti oggetti sono stati creati in memoria durante l'esecuzione di questo codice?
+
+const hamburger = { name: "Cheese Burger", weight: 250 };
+const secondBurger = hamburger;
+secondBurger.name = 'Double Cheese Burger';
+secondBurger.weight = 500;
+
+console.log(hamburger.name); // ?
+console.log(secondBurger.name ); // ?
+
+
+Risposta: 
+Sia hamburger.name che secondBurger.name stampano 'Double Cheese Burger'.
+Un solo oggetto è stato creato in memoria. secondBurger è una reference di hamburger.
+
+=============================================================================================================================
+
+Code Question 2
+
+P.S.: Ricordati che gli Array, come gli oggetti, sono dei Reference Type (Tipi di Riferimento)!
+Senza lanciare il codice, riesci a prevedere cosa viene stampato in console?
+Quanti oggetti sono stati creati in memoria durante l'esecuzione di questo codice?
+
+const hamburger = { 
+    name: "Cheese Burger", 
+    weight: 250,
+    ingredients: ["Cheese", "Meat", "Bread", "Tomato"]
+};
+​
+const secondBurger = {...hamburger};
+secondBurger.ingredients[0] = "Salad";
+​
+console.log(hamburger.ingredients[0]); // ?
+console.log(secondBurger.ingredients[0]); // ?
+
+Risposta:
+Viene stampato in console "Salad" sia in hamburger.ingredients[0] che secondBurger.ingredients[0].
+Sono stati creati 2 oggetti in memoria. secondBurger è la shallow copy di hamburger ed è stata creata una reference dell'array annidato "ingredients".
+
+=============================================================================================================================
+
+ Code Question 3
+
+Quanti oggetti sono stati creati in memoria durante l'esecuzione di questo codice?
+
+const hamburger = { 
+    name: "Cheese Burger", 
+    weight: 250,
+    maker: {
+        name: "Anonymous Chef",
+        restaurant: {
+            name: "Hyur's Burgers",
+            address: "Main Street, 123",
+            isOpen: true,
+        },
+        age: 29
+    }
+};
+​
+const secondBurger = structuredClone(hamburger);
+const thirdBurger = structuredClone(hamburger);
+
+Risposta:
+In totale sono stati creati 9 oggetti in memoria.
+
+=============================================================================================================================
+
+Code Question 4
+
+Qual è il metodo migliore per clonare l’oggetto chef, e perché?
+Qual è il metodo migliore per clonare l’oggetto restaurant, e perché?
+
+const chef = {
+    name: "Chef Hyur",
+    age: 29,
+    makeBurger: (num = 1) => {
+        console.log(`Ecco ${num} hamburger per te!`);
+    },
+}
+​
+const restaurant = {
+    name: "Hyur's Burgers",
+    address: {
+        street: 'Main Street',
+        number: 123,
+    },
+    openingDate: new Date(2025, 3, 11),
+    isOpen: false,
+};
+
+Il migliore metodo per clonare l'oggetto chef è lo spread operator, poiché in questo caso clonerebbe anche la funzione makeBurger.
+Il migliore metodo per clonare l'oggetto restaurant è lo structuredClone() poiché fa una deep copy e clona anche oggetti complessi (come la data in questo esempio).
+
